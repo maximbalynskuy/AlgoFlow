@@ -1,0 +1,113 @@
+﻿<Window x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:av="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="Алгоритмічні анімації" 
+        WindowState="Maximized"
+        WindowStyle="SingleBorderWindow"
+        Height="620" Width="800">
+    <Grid ShowGridLines="true" Background="#FF00821B">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Верхня панель -->
+        <StackPanel x:Name="header" Grid.Row="0" Background="#FF00821B" Orientation="Horizontal">
+            <ComboBox x:Name="comboBox" Width="250" VerticalAlignment="Center" HorizontalAlignment="Left"
+                SelectedIndex="0" Margin="40,0,0,0">
+                <ComboBoxItem Content="Сортування злиттям"/>
+                <ComboBoxItem Content="Алгоритм Дейкстри (зменшення задачі до менших підзадач)"/>
+                <ComboBoxItem Content="Метод Гауса для розв'язання систем рівнянь"/>
+                <ComboBoxItem Content="Алгоритм Флойда-Воршалла (пошук найкоротших шляхів)"/>
+                <ComboBoxItem Content="Обхід дерев(прямий, симетричний, зворотній)"/>
+                <ComboBoxItem Content="Пошук у глибину DFS"/>
+                <ComboBoxItem Content="Задача про найбільшу суму підмасиву (Kadane's Algorithm)"/>
+            </ComboBox>
+            <TextBlock Text="розмірність:" Foreground="White" VerticalAlignment="Center" Margin="20,0,5,0"/>
+            <TextBox x:Name="txtDimension1" Width="50" Height="25" VerticalAlignment="Center" Margin="0,0,5,0"/>
+        </StackPanel>
+
+        <!-- Основна область з канвою -->
+        <Grid x:Name="main" Grid.Row="1">
+            <Canvas x:Name="graphCanvasIn" Background="#FFF8FFE0"/>
+            <TextBlock x:Name="stepDescription" 
+                      VerticalAlignment="Top" 
+                      HorizontalAlignment="Center" 
+                      Margin="0,10"
+                      TextWrapping="Wrap" 
+                      FontSize="14"/>
+        </Grid>
+
+        <!-- Панель керування кроками -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <Button x:Name="prevStepButton" Content="Назад" Width="100" Height="30" 
+                    Margin="5" Click="OnPrevStepClick" IsEnabled="False"/>
+            <Button x:Name="nextStepButton" Content="Вперед" Width="100" Height="30" 
+                    Margin="5" Click="OnNextStepClick" IsEnabled="False"/>
+            <Button x:Name="autoPlayButton" Content="Авто" Width="100" Height="30" 
+                    Margin="5" Click="OnAutoPlayClick" IsEnabled="False"/>
+        </StackPanel>
+        <StackPanel x:Name="manualStepButtons" 
+            Grid.Row="2" 
+            Orientation="Horizontal" 
+            HorizontalAlignment="Center"
+            Visibility="Collapsed">
+            <Button x:Name="btnSubProblem" Content="Розділення" 
+             Width="100" Height="30" Margin="5"
+             Click="OnManualStepClick" Tag="SubProblem"/>
+            <Button x:Name="btnGreater" Content="Більше" 
+             Width="100" Height="30" Margin="5"
+             Click="OnManualStepClick" Tag="Greater"/>
+            <Button x:Name="btnLess" Content="Менше" 
+             Width="100" Height="30" Margin="5"
+             Click="OnManualStepClick" Tag="Less"/>
+            <Button x:Name="btnSwap" Content="Заміна" 
+             Width="100" Height="30" Margin="5"
+             Click="OnManualStepClick" Tag="Swap"/>
+            <Button x:Name="btnMerge" Content="Злиття" 
+             Width="100" Height="30" Margin="5"
+             Click="OnManualStepClick" Tag="Merge"/>
+        </StackPanel>
+        <!-- Панель повідомлень для ручного режиму -->
+        <TextBlock x:Name="manualModeMessage" 
+                  Grid.Row="3" 
+                  HorizontalAlignment="Center" 
+                  Margin="0,10"
+                  FontSize="14"
+                  Foreground="White"/>
+
+        <!-- Нижня панель -->
+        <DockPanel x:Name="footer" Grid.Row="4" Background="#FF00821B">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Click="btnInit_Click" x:Name="btnInit" Grid.Column="0" Content="Генерувати початкові умови"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5"/>
+                <Button Click="btnStart_Click" x:Name="btnStart" Grid.Column="1" Content="Візуалізувати"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5" IsEnabled="False"/>
+                <Button Click="btnStartHand_Click" x:Name="btnStartHand" Grid.Column="2" Content="Ручне рішення"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5" IsEnabled="False"/>
+                <Button Click="btnPause_Click" x:Name="btnPause" Grid.Column="3" Content="Пауза"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5"/>
+                <Button Click="btnClear_Click" x:Name="btnClear" Grid.Column="4" Content="Очистити все"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5"/>
+            </Grid>
+        </DockPanel>
+
+        <!-- Панель кнопок для ручного режиму -->
+       
+    </Grid>
+</Window>
